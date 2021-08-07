@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
 import styled, { css, keyframes } from "styled-components";
+import StatusPopup from "../components/StatusPopup";
 
 const ExTranslatable = {
   id: 1,
@@ -25,19 +26,27 @@ const VocabularyQuizPage = () => {
     }, 200);
 
     if (e.target.value === currentTranslate.means.tr) {
-      //TODO: go to next translation
+      // Correct answer
+      // TODO: go to next question
       inputRef.current.readOnly = true;
       setShowPopup(true);
     }
   };
 
-  const getNextTranslation = () => {
+  const getNextQuestion = () => {
     setShowPopup(false);
+    setCurrentInput("");
+    inputRef.current.value = "";
+    inputRef.current.readOnly = false;
+    // get next question
   };
 
   return (
     <StyledTranslateDiv scale={isScale}>
-      <div className="translate">{currentTranslate.word}</div>
+      <div className="translate">
+        What does it mean
+        <span className="word">"{currentTranslate.word}"</span>
+      </div>
       <StyledTranslateContainer
         correct={currentInput === currentTranslate.means.tr}
       >
@@ -48,27 +57,34 @@ const VocabularyQuizPage = () => {
           onChange={translateInputOnChange}
         />
       </StyledTranslateContainer>
+      <StatusPopup
+        status={{
+          display: showPopup,
+          title: "Correct!",
+          onClick: getNextQuestion,
+        }}
+      />
     </StyledTranslateDiv>
   );
 };
 
 const ScaleOut = keyframes`
   from {
-    transform: scale(1);
+    font-size: 48px;
   }
 
   to {
-    transform: scale(1.1);  
+    font-size: 44px;
   }
-`;
+  `;
 
 const ScaleIn = keyframes`
   from {
-    transform: scale(1.1);
+    font-size: 44px;
   }
-
+  
   to {
-    transform: scale(1);  
+    font-size: 48px;
   }
 `;
 
@@ -77,21 +93,29 @@ const StyledTranslateDiv = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-
   .translate {
     animation: ${({ scale }) =>
       scale
         ? css`
-            ${ScaleOut} .2s linear forwards
+            ${ScaleOut} .1s linear forwards
           `
         : css`
-            ${ScaleIn} .2s linear forwards
+            ${ScaleIn} .1s linear forwards
           `};
     font-size: 48px;
     color: white;
-    text-shadow: 4px 6px 6px black;
+    text-shadow: 2px 3px 6px black;
     font-weight: bold;
     padding: 24px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    min-height: 240px;
+    .word {
+      color: var(--primary-text-color);
+    }
   }
 `;
 
@@ -102,17 +126,17 @@ const StyledTranslateContainer = styled.div`
   margin: 24px 0;
   display: flex;
   align-items: center;
-  background-color: #2c394b;
+  background-color: ${({ correct }) => (correct ? "green" : "#2c394b")};
+  transition: 0.3s;
 
   input {
     font-size: 24px;
     text-align: center;
     border: none;
     flex: 1;
-    color: ${({ correct }) => (correct ? "green" : "white")};
+    color: white;
     font-weight: bold;
     background-color: unset;
-    transition: color 0.3s;
     &:focus {
       outline: none;
     }

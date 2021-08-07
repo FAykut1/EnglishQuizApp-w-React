@@ -27,7 +27,11 @@ const StyledMainDiv = styled.div`
   flex-direction: column;
   align-items: center;
   .title {
-    font-size: 36px;
+    font-weight: bold;
+    text-shadow: 2px 3px 6px black;
+    color: var(--secondary-color);
+    font-size: 48px;
+    text-align: center;
     margin-bottom: 24px;
   }
 `;

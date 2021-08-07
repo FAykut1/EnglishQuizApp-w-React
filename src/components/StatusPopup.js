@@ -1,10 +1,12 @@
 import styled from "styled-components";
+import { FaCheck } from "react-icons/fa";
 
 const StatusPopup = ({ status }) => {
   return (
     <StyledStatusPopup display={status?.display}>
       <StyledStatusContainer display={status?.display}>
         <div className="status-title">{status?.title}</div>
+        <FaCheck color="green" size={48} />
         <button onClick={status?.onClick}>Next</button>
       </StyledStatusContainer>
     </StyledStatusPopup>
@@ -29,7 +31,7 @@ const StyledStatusContainer = styled.div`
   width: 300px;
   height: 300px;
   transform: translate(-50%, -50%);
-  background-color: #2c394b;
+  background-color: rgba(0, 0, 0, 0.9);
   border-radius: 24px;
   display: flex;
   align-items: center;
@@ -37,16 +39,17 @@ const StyledStatusContainer = styled.div`
   flex-direction: column;
   box-shadow: 0 0 4px black;
   opacity: ${({ display }) => (display ? "1" : "0")};
-  transition: opacity 0.5s;
+  transition: opacity 1s;
   .status-title {
     color: green;
-    font-size: 64px;
+    font-size: 56px;
     font-weight: bold;
-    text-shadow: 0 0 4px green;
+    /* text-shadow: 0 0 4px green; */
   }
 
   button {
-    padding: 12px 24px;
+    width: calc(100% - 48px);
+    height: 48px;
     background-color: hsl(10, 100%, 58%);
     border: none;
     color: white;

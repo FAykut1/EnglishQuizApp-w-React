@@ -1,6 +1,4 @@
-import { useRef, useState } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import styled, { css, keyframes } from "styled-components";
 import "./App.css";
 import Header from "./components/Header";
 import MainPage from "./pages/Main";
