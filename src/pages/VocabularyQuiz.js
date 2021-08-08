@@ -56,16 +56,17 @@ const VocabularyQuizPage = () => {
   return (
     <StyledTranslateDiv scale={isScale}>
       <div className="translate">
-        What does it mean
+        <span className="question-prefix">What does it mean</span>
         <span className="word">"{currentQuestion.question.content}"</span>
       </div>
       <StyledTranslateContainer
         correct={currentInput === currentQuestion.answer.content}
+        onClick={() => inputRef.current.focus()}
       >
         <input
           ref={inputRef}
           type="text"
-          placeholder="Means"
+          placeholder="Means..."
           onChange={translateInputOnChange}
         />
       </StyledTranslateContainer>
@@ -102,6 +103,7 @@ const ScaleIn = keyframes`
 
 const StyledTranslateDiv = styled.div`
   display: flex;
+  height: 100%;
   justify-content: center;
   align-items: center;
   flex-direction: column;
@@ -115,7 +117,7 @@ const StyledTranslateDiv = styled.div`
             ${ScaleIn} .1s linear forwards
           `};
     font-size: 48px;
-    color: white;
+    color: var(--secondary-color);
     text-shadow: 2px 3px 6px black;
     font-weight: bold;
     padding: 24px;
@@ -126,6 +128,7 @@ const StyledTranslateDiv = styled.div`
     flex-direction: column;
     min-height: 240px;
     .word {
+      margin-top: 12px;
       color: var(--primary-text-color);
     }
   }
@@ -133,20 +136,20 @@ const StyledTranslateDiv = styled.div`
 
 const StyledTranslateContainer = styled.div`
   box-shadow: 0px 0px 8px 2px hsl(215, 26%, 15%);
-  height: 100px;
+  height: 80px;
   padding: 12px;
   margin: 24px 0;
   display: flex;
   align-items: center;
-  background-color: ${({ correct }) => (correct ? "green" : "#2c394b")};
+  background-color: ${({ correct }) => (correct ? "green" : "")};
   transition: 0.3s;
-
+  border-radius: 12px;
   input {
     font-size: 24px;
     text-align: center;
     border: none;
     flex: 1;
-    color: white;
+    color: var(--primary-text-color);
     font-weight: bold;
     background-color: unset;
     &:focus {

@@ -15,6 +15,7 @@ const StatusPopup = ({ status }) => {
 
 const StyledStatusPopup = styled.div`
   visibility: ${({ display }) => (display ? "visible" : "hidden")};
+  opacity: ${({ display }) => (display ? "1" : "0")};
   position: absolute;
   top: 0;
   bottom: 0;
@@ -31,7 +32,7 @@ const StyledStatusContainer = styled.div`
   width: 300px;
   height: 300px;
   transform: translate(-50%, -50%);
-  background-color: rgba(0, 0, 0, 0.9);
+  background-color: var(--primary-color);
   border-radius: 24px;
   display: flex;
   align-items: center;
@@ -39,7 +40,7 @@ const StyledStatusContainer = styled.div`
   flex-direction: column;
   box-shadow: 0 0 4px black;
   opacity: ${({ display }) => (display ? "1" : "0")};
-  transition: opacity 1s;
+  transition: opacity 0.5s;
   .status-title {
     color: green;
     font-size: 56px;

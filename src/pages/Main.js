@@ -1,21 +1,19 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { BsTriangleFill } from "react-icons/bs";
 
 const MainPage = () => {
   return (
     <StyledMainDiv>
-      <StyledLogo>
+      {/* <StyledLogo>
         <img className="image" src="" alt="app logo" />
-      </StyledLogo>
+      </StyledLogo> */}
 
       <div className="title">Wanna learn english?</div>
 
       <StyledContent>
         <Link className="link" to="/vocabulary/en-tr">
-          Learn Vocabulary
-        </Link>
-        <Link className="link" to="/quiz/">
-          Quick Quiz
+          <BsTriangleFill size={48} />
         </Link>
       </StyledContent>
     </StyledMainDiv>
@@ -24,7 +22,9 @@ const MainPage = () => {
 
 const StyledMainDiv = styled.div`
   display: flex;
+  height: 100%;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   .title {
     font-weight: bold;
@@ -37,8 +37,8 @@ const StyledMainDiv = styled.div`
 `;
 
 const StyledLogo = styled.div`
-  width: 240px;
-  height: 240px;
+  width: 200px;
+  height: 200px;
   margin: 24px 0;
   background-color: #fff;
   border-radius: 24px;
@@ -58,10 +58,20 @@ const StyledContent = styled.div`
     align-items: center;
     background-color: var(--secondary-color);
     color: var(--secondary-text-color);
-    width: 200px;
-    height: 60px;
+    width: 120px;
+    height: 120px;
+    border-radius: 60px;
     text-decoration: none;
     margin-bottom: 12px;
+    box-shadow: 0 0 2px black;
+    transition: 0.2s;
+    &:hover {
+      box-shadow: 0 0 6px black;
+    }
+
+    svg {
+      transform: rotate(90deg);
+    }
   }
 `;
 

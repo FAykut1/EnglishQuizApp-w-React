@@ -7,15 +7,15 @@ import VocabularyQuizPage from "./pages/VocabularyQuiz";
 function App() {
   return (
     <div className="App">
-      <Header />
-      <main>
-        <BrowserRouter>
+      <BrowserRouter>
+        <Header />
+        <main>
           <Switch>
             <Route path="/vocabulary/en-tr" component={VocabularyQuizPage} />
             <Route path="/" component={MainPage} />
           </Switch>
-        </BrowserRouter>
-      </main>
+        </main>
+      </BrowserRouter>
     </div>
   );
 }
