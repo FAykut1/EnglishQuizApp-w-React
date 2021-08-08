@@ -3,8 +3,9 @@
   --content-height: 90vh;
 
   --background-color: hsl(228, 8%, 87%);
+  --primary-color: #2f3640;
   --secondary-color: hsl(10, 100%, 58%);
-  --primary-text-color: #2f3640;
+  --primary-text-color: var(--primary-color);
   --secondary-text-color: white;
 }
 

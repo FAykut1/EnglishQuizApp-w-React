@@ -14,7 +14,7 @@ const StyledHeader = styled.header`
   display: flex;
   justify-content: space-around;
   align-items: center;
-  background-color: var(--secondary-color);
+  background-color: var(--primary-text-color);
   color: white;
   box-shadow: 0 2px 2px rgba(0, 0, 0, 0.5);
 `;

@@ -1,21 +1,17 @@
 import { useRef, useState } from "react";
 import styled, { css, keyframes } from "styled-components";
 import StatusPopup from "../components/StatusPopup";
-
-const ExTranslatable = {
-  id: 1,
-  word: "queue",
-  means: {
-    tr: "kuyruk",
-  },
-};
+import db from "../example_db.json";
 
 const VocabularyQuizPage = () => {
-  const [currentTranslate, setCurrentTranslate] = useState(ExTranslatable);
   const [currentInput, setCurrentInput] = useState("");
   const [isScale, setisScale] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
   const inputRef = useRef(null);
+
+  const allQuestions = db.questions;
+
+  const [currentQuestion, setcurrentQuestion] = useState(allQuestions[0]);
 
   const translateInputOnChange = (e) => {
     setCurrentInput(e.target.value);
@@ -25,12 +21,22 @@ const VocabularyQuizPage = () => {
       setisScale(false);
     }, 200);
 
-    if (e.target.value === currentTranslate.means.tr) {
-      // Correct answer
-      // TODO: go to next question
-      inputRef.current.readOnly = true;
-      setShowPopup(true);
+    if (e.target.value === currentQuestion.answer.content) {
+      correctAnswer();
+    } else {
+      wrongAnswer();
     }
+  };
+
+  const correctAnswer = () => {
+    // Correct answer
+    inputRef.current.readOnly = true;
+    setShowPopup(true);
+    // next question called to popup
+  };
+
+  const wrongAnswer = () => {
+    //nothing for now
   };
 
   const getNextQuestion = () => {
@@ -39,16 +45,22 @@ const VocabularyQuizPage = () => {
     inputRef.current.value = "";
     inputRef.current.readOnly = false;
     // get next question
+    const nextQuestion = allQuestions[currentQuestion._id + 1];
+    setcurrentQuestion(nextQuestion);
   };
+
+  if (!currentQuestion) {
+    return <div>You answered all the questions congrats!</div>;
+  }
 
   return (
     <StyledTranslateDiv scale={isScale}>
       <div className="translate">
         What does it mean
-        <span className="word">"{currentTranslate.word}"</span>
+        <span className="word">"{currentQuestion.question.content}"</span>
       </div>
       <StyledTranslateContainer
-        correct={currentInput === currentTranslate.means.tr}
+        correct={currentInput === currentQuestion.answer.content}
       >
         <input
           ref={inputRef}
